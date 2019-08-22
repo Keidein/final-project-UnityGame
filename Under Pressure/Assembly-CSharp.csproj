@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnxietyBar.cs" />
     <Compile Include="Assets\Scripts\LevelTimer.cs" />
+    <Compile Include="Assets\Scripts\ResolutionManager.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/91030418/UnderPressure/final-project-UnityGame/Under Pressure/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
