@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelTimer : MonoBehaviour {
 
@@ -9,10 +10,13 @@ public class LevelTimer : MonoBehaviour {
 
 	private Text theText;
 
+	//public GameObject gameOverMenuUI;
+
 	//private PauseMenu thePauseMenu;
 
 	// Use this for initialization
 	void Start () {
+		//gameOverMenuUI.SetActive(false);
 		theText = GetComponent<Text>();
 
 		//thePauseMenu = FindObjectOfType<PauseMenu>();
@@ -25,5 +29,6 @@ public class LevelTimer : MonoBehaviour {
 
 		levelStartTime -= Time.deltaTime;
 		theText.text = "" + Mathf.Round (levelStartTime);
+
 	}
 }
