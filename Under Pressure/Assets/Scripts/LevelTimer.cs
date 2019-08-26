@@ -20,8 +20,8 @@ public class LevelTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/* if (thePauseMenu.isPaused)
-			return; */
+		//if (thePauseMenu.IsPaused)
+		//	return;
 
 		levelStartTime -= Time.deltaTime;
 		theText.text = "" + Mathf.Round (levelStartTime);
