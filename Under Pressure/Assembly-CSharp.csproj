@@ -51,6 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Imphenzia\GradientSky\Scripts\Common\GradientSkyCommon.cs" />
+     <Compile Include="Assets\Imphenzia\GradientSky\Scripts\GradientSkyCamera.cs" />
+     <Compile Include="Assets\Imphenzia\GradientSky\Scripts\GradientSkyObject.cs" />
      <Compile Include="Assets\Scripts\AnxietyBar.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Gameover.cs" />
@@ -101,6 +104,7 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\Imphenzia\GradientSky\ReadMe - GradientSky.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald Bold - OFL.txt" />
@@ -113,6 +117,8 @@
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
+     <None Include="Assets\Imphenzia\GradientSky\Shaders\VertexColorCamera.shader" />
+     <None Include="Assets\Imphenzia\GradientSky\Shaders\VertexColorObject.shader" />
      <None Include="Assets\Pixel Font - Tripfive\_README.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/91030418/Documents/Unity/Under Pressure/final-project-UnityGame/Under Pressure/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
