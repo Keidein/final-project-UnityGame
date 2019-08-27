@@ -10,13 +10,10 @@ public class LevelTimer : MonoBehaviour {
 
 	private Text theText;
 
-	//public GameObject gameOverMenuUI;
-
 	//private PauseMenu thePauseMenu;
 
 	// Use this for initialization
 	void Start () {
-		//gameOverMenuUI.SetActive(false);
 		theText = GetComponent<Text>();
 
 		//thePauseMenu = FindObjectOfType<PauseMenu>();
@@ -30,5 +27,9 @@ public class LevelTimer : MonoBehaviour {
 		levelStartTime -= Time.deltaTime;
 		theText.text = "" + Mathf.Round (levelStartTime);
 
+		if (levelStartTime <= 0)
+		{
+			FindObjectOfType<GameManager>().EndGame();
+		}
 	}
 }
