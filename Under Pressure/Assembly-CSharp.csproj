@@ -51,9 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Imphenzia\GradientSky\Scripts\Common\GradientSkyCommon.cs" />
-     <Compile Include="Assets\Imphenzia\GradientSky\Scripts\GradientSkyCamera.cs" />
-     <Compile Include="Assets\Imphenzia\GradientSky\Scripts\GradientSkyObject.cs" />
+     <Compile Include="Assets\PSD Logo Templates\Sample\IconPreview.cs" />
      <Compile Include="Assets\Scripts\AnxietyBar.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Gameover.cs" />
@@ -95,6 +93,9 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\UI Assets\Imphenzia\GradientSky\Scripts\Common\GradientSkyCommon.cs" />
+     <Compile Include="Assets\UI Assets\Imphenzia\GradientSky\Scripts\GradientSkyCamera.cs" />
+     <Compile Include="Assets\UI Assets\Imphenzia\GradientSky\Scripts\GradientSkyObject.cs" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
@@ -103,8 +104,9 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\PSD Logo Templates\Fonts\Baloo\OFL.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\Imphenzia\GradientSky\ReadMe - GradientSky.txt" />
+     <None Include="Assets\UI Assets\Imphenzia\GradientSky\ReadMe - GradientSky.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald Bold - OFL.txt" />
@@ -116,10 +118,12 @@
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\PSD Logo Templates\Fonts\Passion_One\OFL.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
-     <None Include="Assets\Imphenzia\GradientSky\Shaders\VertexColorCamera.shader" />
-     <None Include="Assets\Imphenzia\GradientSky\Shaders\VertexColorObject.shader" />
-     <None Include="Assets\Pixel Font - Tripfive\_README.txt" />
+     <None Include="Assets\UI Assets\Imphenzia\GradientSky\Shaders\VertexColorCamera.shader" />
+     <None Include="Assets\UI Assets\Imphenzia\GradientSky\Shaders\VertexColorObject.shader" />
+     <None Include="Assets\PSD Logo Templates\Fonts\Changa_One\OFL.txt" />
+     <None Include="Assets\PSD Logo Templates\Fonts\Lilita_One\OFL.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/91030418/Documents/Unity/Under Pressure/final-project-UnityGame/Under Pressure/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
