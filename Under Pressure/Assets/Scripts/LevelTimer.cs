@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelTimer : MonoBehaviour {
 
-	public float levelStartTime;
+	public float levelStartTime = 0f;
 
 	private Text theText;
 
@@ -25,7 +25,14 @@ public class LevelTimer : MonoBehaviour {
 		//	return;
 
 		levelStartTime -= Time.deltaTime;
-		theText.text = "" + Mathf.Round (levelStartTime);
+
+		int seconds = (int)(levelStartTime % 60);
+		int minutes = (int)(levelStartTime / 60) % 60; 
+
+		//theText.text = "" + Mathf.Round (levelStartTime);
+
+		string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
+		theText.text = timerString;
 
 		if (levelStartTime <= 0)
 		{
