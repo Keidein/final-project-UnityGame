@@ -8,18 +8,25 @@ public class CompletePlayerController : MonoBehaviour
 {
 
     public float speed;                //Floating point variable to store the player's movement speed.
-    public Text anxiexty_text;          //Stores the anxiety ratio text.
     public int crowd_panic_rate;       //Controls the rate at which the crowd enemy raises 
     public int pick_up_restore;
     public int salesman_panic_rate;
-    
+
+
+    public Text anxiexty_text;          //Stores the anxiety ratio text.
+    public GameObject breathing_icon;
+    public GameObject music_icon;
+    public GameObject stress_icon;
 
     private Rigidbody2D rb2d;
-    private int anxiety;
+    public int anxiety;
+    [SerializeField] private health_bar_controller healthBar;
 
     private bool stress_ball_obtained; //checks to see if the player has obtained the stress ball
     private bool breathing; //checks to see if the player is currently breathing
     private bool music_ready; //checks to see if the music player is on cooldown
+
+    //set up the interactions for the first level.
 
 
 
@@ -30,10 +37,11 @@ public class CompletePlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         anxiety = 50;
+        
+
         pick_up_restore = 15;
         stress_ball_obtained = false;
         breathing = false;
-        salesman_panic_rate = 10;
         music_ready = true;
 
 
@@ -63,6 +71,8 @@ public class CompletePlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        //ABILITY KEY INPUTS
         if (Input.GetKeyDown("space"))
         {
             if (stress_ball_obtained == true)
@@ -93,12 +103,30 @@ public class CompletePlayerController : MonoBehaviour
             SetAnxietyText();
         }
 
-
-
-
-
-        if (anxiety == 100)
+        //UI INFORMATION
+        if (stress_ball_obtained == true)
         {
+            stress_icon.SetActive(true);
+        } else if (stress_ball_obtained == false)
+        {
+            stress_icon.SetActive(false);
+        } if (music_ready == false)
+        {
+            music_icon.SetActive(false);
+        } if (breathing == true )
+        {
+            breathing_icon.SetActive(false);
+        } else if (breathing == false)
+        {
+            breathing_icon.SetActive(true);
+        }
+
+
+
+        if (anxiety >= 100)
+        {
+            anxiety = 100;
+            SetAnxietyText();
             FindObjectOfType<GameManager>().EndGame();
         }
 
@@ -170,6 +198,7 @@ public class CompletePlayerController : MonoBehaviour
     void music_cooldown_complete()
     {
         music_ready = true;
+        music_icon.SetActive(true);
     }
 
     void unhealthy_pickup()
@@ -200,6 +229,7 @@ public class CompletePlayerController : MonoBehaviour
         {
             breathing = true;
             anxiety = current_anxiety;
+
             SetAnxietyText();
             yield return new WaitForSeconds(.3f);
         }
@@ -238,6 +268,7 @@ public class CompletePlayerController : MonoBehaviour
         }
     }
 
+    //dictate behaviour for when player is within crush hitbox
     IEnumerator friends_panic()
     {
         for (float current_speed = speed; current_speed <= 100; current_speed -= 0.1f)
@@ -251,7 +282,7 @@ public class CompletePlayerController : MonoBehaviour
         }
     }
 
-
+    //dictate behaviour for when player is within crush hitbox
     IEnumerator crush_panic()
     {
         for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += 1)
