@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
+//using TMPro;
 
 public class LevelTimer : MonoBehaviour {
 
 	public float levelStartTime = 0f;
 
-	private TextMeshProUGUI textmeshPro;
+	//private TextMeshProUGUI textmeshPro;
+	Text theText;
 
 	//private PauseMenu thePauseMenu;
 
 	// Use this for initialization
 	void Start () {
-		textmeshPro = GetComponent<TMPro.TextMeshProUGUI>();
+		theText = GetComponent<Text>();
         
 		//thePauseMenu = FindObjectOfType<PauseMenu>();
 	}
@@ -33,7 +34,7 @@ public class LevelTimer : MonoBehaviour {
 		//theText.text = "" + Mathf.Round (levelStartTime);
 
 		string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
-		textmeshPro.text = timerString;
+		theText.text = timerString;
 
 
 	// GAME OVER CONDITION
