@@ -12,7 +12,11 @@ TagManager:
   - friends
   - bully
   - crush
-  - check_point
+  - check_point_one
+  - check_point_two
+  - check_point_three
+  - exit_door
+  - check_point_four
   layers:
   - Default
   - TransparentFX

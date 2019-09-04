@@ -26,8 +26,20 @@ public class CompletePlayerController : MonoBehaviour
     private bool breathing; //checks to see if the player is currently breathing
     private bool music_ready; //checks to see if the music player is on cooldown
 
-    //set up the interactions for the first level.
 
+    //check to see that all the tasks in the first level have been completed.
+    private bool check_one_ready;
+    private bool check_two_ready;
+    private bool check_three_ready;
+    private bool check_four_ready;
+    //check to see if the player is in the appropiate zones.
+    private bool in_zone_one;
+    private bool in_zone_two;
+    private bool in_zone_three;
+    private bool in_zone_four;
+
+    //ready to leave
+    private bool exit_ready;
 
 
     // Use this for initialization
@@ -36,14 +48,25 @@ public class CompletePlayerController : MonoBehaviour
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
 
-        anxiety = 50;
-        
-
+        anxiety = 50;       
         pick_up_restore = 15;
         stress_ball_obtained = false;
         breathing = false;
         music_ready = true;
 
+        //set up the booleans for the first level tasks
+        //check to see that all the tasks in the first level have been completed.
+        check_one_ready = false;
+        check_two_ready = false;
+        check_three_ready = false;
+        check_four_ready = false;
+        //check to see if the player is in the appropiate zones.
+        in_zone_one = false;
+        in_zone_two = false;
+        in_zone_three = false;
+        in_zone_four = false;
+        //check to see if the player is on the exit door
+        exit_ready = false;
 
         SetAnxietyText();
     }
@@ -103,6 +126,36 @@ public class CompletePlayerController : MonoBehaviour
             SetAnxietyText();
         }
 
+        //Check First Level Tasks
+        if (Input.GetKeyDown("c") && in_zone_one == true)
+        {
+            print("1");
+            check_one_ready = true;
+        }
+        else if (Input.GetKeyDown("c") && in_zone_two == true)
+        {
+            print("2");
+            check_two_ready = true;
+        }
+        else if (Input.GetKeyDown("c") && in_zone_three == true)
+        {
+            print("3");
+            check_three_ready = true;
+        }
+        else if (Input.GetKeyDown("c") && in_zone_four == true)
+        {
+            print("4");
+            check_four_ready = true;
+        }
+
+        //Finish first level
+        if (Input.GetKeyDown("c") && check_one_ready == true && check_two_ready == true && check_three_ready == true && check_four_ready == true && exit_ready == true)
+        {
+            FindObjectOfType<GameManager>().EndGame();
+        }
+
+
+
         //UI INFORMATION
         if (stress_ball_obtained == true)
         {
@@ -121,8 +174,11 @@ public class CompletePlayerController : MonoBehaviour
             breathing_icon.SetActive(true);
         }
 
+        
 
 
+        //END THE GAME IF ANXIETY REACHES 100
+        //ALSO PREVENTS ANXIETY FROM GOING OVER 100
         if (anxiety >= 100)
         {
             anxiety = 100;
@@ -134,6 +190,9 @@ public class CompletePlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
+        //Check through to see what the player is colliding with
+        //And also begin the code for each seperate pickup / enemy
 
         if (other.gameObject.CompareTag("good_pickup"))
         {
@@ -172,6 +231,28 @@ public class CompletePlayerController : MonoBehaviour
         {
             anxiety = anxiety + 40;
         }
+        else if (other.gameObject.CompareTag("check_point_one"))
+        {
+            in_zone_one = true;
+        }
+        else if (other.gameObject.CompareTag("check_point_two"))
+        {
+            in_zone_two = true;
+        }
+        else if (other.gameObject.CompareTag("check_point_three"))
+        {
+            in_zone_three = true;
+        }
+        else if (other.gameObject.CompareTag("check_point_four"))
+        {
+            in_zone_four = true;
+        } else if (other.gameObject.CompareTag("exit_door"))
+        {
+            exit_ready = true;
+        }
+
+
+
 
         SetAnxietyText();
     }
@@ -192,7 +273,27 @@ public class CompletePlayerController : MonoBehaviour
         } else if (other.gameObject.CompareTag("friends"))
         {
             StopCoroutine("friends_panic");
+        } else if (other.gameObject.CompareTag("check_point_one"))
+        {
+            in_zone_one = false;
         }
+        else if (other.gameObject.CompareTag("check_point_two"))
+        {
+            in_zone_two = false;
+        }
+        else if (other.gameObject.CompareTag("check_point_three"))
+        {
+            in_zone_three = false;
+        }
+        else if (other.gameObject.CompareTag("check_point_four"))
+        {
+            in_zone_four = false;
+        } else if (other.gameObject.CompareTag("exit_door"))
+        {
+            exit_ready = false;
+        }
+
+
     }
 
     void music_cooldown_complete()
