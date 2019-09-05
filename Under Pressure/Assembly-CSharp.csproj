@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\ResolutionManager.cs" />
+     <Compile Include="Assets\UI Assets\Audio\Sounds\Zero Rare\Retro Sound Effects\Demo\Demo.cs" />
      <Compile Include="Assets\UI Assets\Imphenzia\GradientSky\Scripts\Common\GradientSkyCommon.cs" />
      <Compile Include="Assets\UI Assets\Imphenzia\GradientSky\Scripts\GradientSkyCamera.cs" />
      <Compile Include="Assets\UI Assets\Imphenzia\GradientSky\Scripts\GradientSkyObject.cs" />
