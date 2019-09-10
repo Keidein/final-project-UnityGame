@@ -12,15 +12,15 @@ public class Player : MonoBehaviour
     // Ethans code
     #region Ethans Variables
     public int crowd_panic_rate;        //Controls the rate at which the crows enemy raises
-    public int pick_up_restore;
+    public int pick_up_restore = 15;
     public int salesman_panic_rate;
+    public int anxiety;
 
     public Text anxiety_text;           //Stores the anxiety ratio text.
     public GameObject breathing_icon;
     public GameObject music_icon;
     public GameObject stress_icon;
 
-    public int anxiety;
     [SerializeField] private health_bar_controller healthBar;
 
     private bool stress_ball_obtained;  //checks to see if the player has obtained the stress ball
@@ -43,8 +43,8 @@ public class Player : MonoBehaviour
     private bool exit_ready;
     #endregion
 
-    #region update method
     // Taken from Ethans code, but modified to reduce line count.
+    #region Ethans update method
     void Update()
     {
         //ABILITY KEY INPUTS
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region FixedUpdate() so the player can move.
+    #region Dylans FixedUpdate() so the player can move.
     void FixedUpdate()
     {
         if (!breathing) // Taken from Ethans code, don't run the code inside if the player is breathing.
@@ -154,12 +154,63 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("good_pickup"))
+        {
+            anxiety -= pick_up_restore;
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("stress_ball"))
+        {
+            stress_ball_obtained = true;
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("crowd")) StartCoroutine("crowd_panic");
+
+        if (other.gameObject.CompareTag("bad_pickup"))
+        {
+            anxiety -= pick_up_restore;
+            Destroy(other.gameObject);
+            Invoke("unhealthy_pickup", 3);
+        }
+
+        if (other.gameObject.CompareTag("salesman")) StartCoroutine("salesman_panic");
+        if (other.gameObject.CompareTag("friends")) StartCoroutine("friends_panic");
+        if (other.gameObject.CompareTag("crush"))
+        {
+            StartCoroutine("crush_panic");
+            StartCoroutine("crush_panic_two");
+        }
+
+        if (other.gameObject.CompareTag("bully")) anxiety += 40;
+
+        if (other.gameObject.CompareTag("check_point_one")) in_zone_one = true;
+        if (other.gameObject.CompareTag("check_point_two")) in_zone_two = true;
+        if (other.gameObject.CompareTag("check_point_three")) in_zone_three = true;
+        if (other.gameObject.CompareTag("check_point_four")) in_zone_four = true;
+        if (other.gameObject.CompareTag("exit_door")) exit_ready = true;
+    }
+
+    void OnTriggerExit(Collider other)
     {
         //Check through to see what the player is colliding with
         //And also begin the code for each seperate pickup / enemy
         if (other.gameObject.CompareTag("crowd")) StopCoroutine("crowd_panic");
-        else if (other.gameObject.CompareTag("salesman")) StopCoroutine("salesman_panic");
+        if (other.gameObject.CompareTag("salesman")) StopCoroutine("salesman_panic");
+        if (other.gameObject.CompareTag("crush"))
+        {
+            StopCoroutine("crush_panic");
+            StopCoroutine("crush_panic_two");
+        }
+        if (other.gameObject.CompareTag("friends")) StopCoroutine("Friends_panic");
+        if (other.gameObject.CompareTag("check_point_one")) in_zone_one = false;
+        if (other.gameObject.CompareTag("check_point_two")) in_zone_two = false;
+        if (other.gameObject.CompareTag("check_point_three")) in_zone_three = false;
+        if (other.gameObject.CompareTag("check_point_four")) in_zone_four = false;
+        if (other.gameObject.CompareTag("exit_door")) exit_ready = false;
     }
 
     #region Ethans functions
@@ -179,11 +230,6 @@ public class Player : MonoBehaviour
     void SetAnxietyText()
     {
         if (anxiety < 0) anxiety = 0;
-        anxiety_text.text = anxiety.ToString() + "%";
-    }
-
-    void SetAnxietyTextBad()
-    {
         anxiety_text.text = anxiety.ToString() + "%";
     }
     #endregion

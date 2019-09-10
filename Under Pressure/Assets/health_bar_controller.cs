@@ -6,7 +6,7 @@ public class health_bar_controller : MonoBehaviour {
 
     private Transform bar;
     private float health;
-    [SerializeField] private CompletePlayerController player;
+    [SerializeField] private Player player;
 
     // Use this for initialization
     void Start () {
