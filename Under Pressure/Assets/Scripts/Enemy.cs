@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Movement movement;
     public Rigidbody rb;
     public GameObject spawn;
     public float SpawnRadius;
 
-    public int enemyAmount = 0;
+    public int enemyAmount;
 
     void Start()
     {
