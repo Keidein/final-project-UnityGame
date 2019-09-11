@@ -28,12 +28,12 @@ public class LevelTimer : MonoBehaviour {
 
 		levelStartTime -= Time.deltaTime;
 
-		int seconds = (int)(levelStartTime % 60);
-		int minutes = (int)(levelStartTime / 60) % 60; 
+		int seconds = Mathf.FloorToInt(levelStartTime % 60);
+		int minutes = Mathf.FloorToInt(levelStartTime / 60); 
 
 		//theText.text = "" + Mathf.Round (levelStartTime);
 
-		string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
+		string timerString = minutes.ToString("00") + ":" + seconds.ToString("00");
 		textmeshPro.text = timerString;
 
 
