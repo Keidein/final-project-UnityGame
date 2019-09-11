@@ -6,9 +6,20 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	public GameObject gameOverMenuUI;
+	public GameObject completeLevelUI;
+
 	bool gameHasEnded = false;
 	public float restartDelay = 5f;
 
+
+	// If level is completed
+	public void CompletedLevel ()
+	{
+		completeLevelUI.SetActive(true);
+		Debug.Log("LEVEL WON!");	
+	}
+
+	// If game is lost
 	public void EndGame ()
 	{
 		if (gameHasEnded == false)

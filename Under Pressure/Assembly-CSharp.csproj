@@ -54,10 +54,12 @@
      <Compile Include="Assets\health_bar_controller.cs" />
      <Compile Include="Assets\health_tracker.cs" />
      <Compile Include="Assets\Scripts\AnxietyBar.cs" />
+     <Compile Include="Assets\Scripts\EndTrigger.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\FollowPlayer.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Gameover.cs" />
+     <Compile Include="Assets\Scripts\LevelComplete.cs" />
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\LevelTimer.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
