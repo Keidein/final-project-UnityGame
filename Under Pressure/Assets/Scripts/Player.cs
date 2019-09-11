@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("good_pickup"))
         {
@@ -194,7 +194,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("exit_door")) exit_ready = true;
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         //Check through to see what the player is colliding with
         //And also begin the code for each seperate pickup / enemy
