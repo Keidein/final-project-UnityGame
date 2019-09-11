@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Rigidbody rb;
+    public Rigidbody2D rb;
     public GameObject spawn;
     public float SpawnRadius;
 
