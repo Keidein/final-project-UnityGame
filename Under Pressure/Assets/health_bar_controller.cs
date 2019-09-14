@@ -21,6 +21,6 @@ public class health_bar_controller : MonoBehaviour {
 
     public void SetSize(float sizeNormalized)
     {
-        bar.localScale = new Vector3(sizeNormalized, 1f);
+        bar.localScale = new Vector2(sizeNormalized, 1f);
     }
 }

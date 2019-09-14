@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public int crowd_panic_rate;        //Controls the rate at which the crows enemy raises
     public int pick_up_restore = 15;
     public int salesman_panic_rate;
+    public int crush_panic_rate;
     public int anxiety;
 
     public Text anxiety_text;           //Stores the anxiety ratio text.
@@ -282,7 +283,7 @@ public class Player : MonoBehaviour
     //dictate behaviour for when player is within crush hitbox
     IEnumerator crush_panic()
     {
-        for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += 1)
+        for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += crush_panic_rate)
         {
             anxiety = current_anxiety;
             SetAnxietyText();
