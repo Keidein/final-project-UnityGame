@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - crowd
+  - crush
+  - friends
   layers:
   - Default
   - TransparentFX
