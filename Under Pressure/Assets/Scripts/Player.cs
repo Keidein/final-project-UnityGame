@@ -8,13 +8,14 @@ public class Player : MonoBehaviour
     // Dylans code
     // Importing the movement script.
     public Movement movement;
+    public GameManager gameManager;
 
     // Ethans code
     #region Ethans Variables
     public int crowd_panic_rate;        //Controls the rate at which the crows enemy raises
     public int pick_up_restore = 15;
     public int salesman_panic_rate;
-    public int anxiety;
+    public int anxiety = 10;
 
     public Text anxiety_text;           //Stores the anxiety ratio text.
     public GameObject breathing_icon;
@@ -23,9 +24,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private health_bar_controller healthBar;
 
-    private bool stress_ball_obtained;  //checks to see if the player has obtained the stress ball
-    private bool breathing;             //checks to see if the player is currently breathing
-    private bool music_ready;           //checks to see if the music player is on cooldown
+    private bool stress_ball_obtained = false;  //checks to see if the player has obtained the stress ball
+    private bool breathing = false;             //checks to see if the player is currently breathing
+    private bool music_ready = true;           //checks to see if the music player is on cooldown
 
     //check to see that all the tasks in the first level have been completed.
     private bool check_one_ready = false;
@@ -39,9 +40,22 @@ public class Player : MonoBehaviour
     private bool in_zone_three = false;
     private bool in_zone_four = false;
 
+    //inform player that they can complete errand
+    public GameObject errandInformer;
+    private bool in_zone = false;
+    public GameObject exitinformer;
+    private bool in_exit = false;
+
     //ready to leave
-    private bool exit_ready;
+    private bool exit_ready = false;
     #endregion
+
+    void Start()
+    {
+        Debug.Log(errandInformer);
+        if (errandInformer == null) errandInformer = null;
+        if (exitinformer == null) exitinformer = null;
+    }
 
     // Taken from Ethans code, but modified to reduce line count.
     #region Ethans update method
@@ -79,9 +93,10 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown("c") && in_zone_four) check_four_ready = true;
 
         //Finish first level
-        if (Input.GetKeyDown("c") && check_one_ready && check_two_ready && check_three_ready && check_four_ready)
+        if (Input.GetKeyDown("c") && check_one_ready && check_two_ready && check_three_ready && check_four_ready && exit_ready)
         {
-            FindObjectOfType<GameManager>().EndGame();
+            //FindObjectOfType<GameManager>().EndGame();
+            gameManager.CompletedLevel();
         }
 
         //UI INFORMATION
@@ -101,6 +116,12 @@ public class Player : MonoBehaviour
             SetAnxietyText();
             FindObjectOfType<GameManager>().EndGame();
         }
+
+        if (in_zone) errandInformer.SetActive(true);
+        else errandInformer.SetActive(false);
+
+        if (check_one_ready && check_two_ready && check_three_ready && check_four_ready && exit_ready) exitinformer.SetActive(true);
+        else exitinformer.SetActive(false);
     }
     #endregion
 
@@ -154,7 +175,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("good_pickup"))
         {
@@ -187,14 +208,14 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("bully")) anxiety += 40;
 
-        if (other.gameObject.CompareTag("check_point_one")) in_zone_one = true;
-        if (other.gameObject.CompareTag("check_point_two")) in_zone_two = true;
-        if (other.gameObject.CompareTag("check_point_three")) in_zone_three = true;
-        if (other.gameObject.CompareTag("check_point_four")) in_zone_four = true;
+        if (other.gameObject.CompareTag("check_point_one")) in_zone_one = true; in_zone = true;
+        if (other.gameObject.CompareTag("check_point_two")) in_zone_two = true; in_zone = true;
+        if (other.gameObject.CompareTag("check_point_three")) in_zone_three = true; in_zone = true;
+        if (other.gameObject.CompareTag("check_point_four")) in_zone_four = true; in_zone = true;
         if (other.gameObject.CompareTag("exit_door")) exit_ready = true;
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         //Check through to see what the player is colliding with
         //And also begin the code for each seperate pickup / enemy
@@ -206,10 +227,10 @@ public class Player : MonoBehaviour
             StopCoroutine("crush_panic_two");
         }
         if (other.gameObject.CompareTag("friends")) StopCoroutine("Friends_panic");
-        if (other.gameObject.CompareTag("check_point_one")) in_zone_one = false;
-        if (other.gameObject.CompareTag("check_point_two")) in_zone_two = false;
-        if (other.gameObject.CompareTag("check_point_three")) in_zone_three = false;
-        if (other.gameObject.CompareTag("check_point_four")) in_zone_four = false;
+        if (other.gameObject.CompareTag("check_point_one")) in_zone_one = false; in_zone = false;
+        if (other.gameObject.CompareTag("check_point_two")) in_zone_two = false; in_zone = false;
+        if (other.gameObject.CompareTag("check_point_three")) in_zone_three = false; in_zone = false;
+        if (other.gameObject.CompareTag("check_point_four")) in_zone_four = false; in_zone = false;
         if (other.gameObject.CompareTag("exit_door")) exit_ready = false;
     }
 

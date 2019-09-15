@@ -6,8 +6,6 @@ public class FollowPlayer : MonoBehaviour
 {
     public Transform target;
 
-    private float speed = 1f;
-
     void LateUpdate()
     {
         if (target != null)
