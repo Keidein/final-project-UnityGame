@@ -11,9 +11,22 @@ public class GameManager : MonoBehaviour {
 	bool gameHasEnded = false;
 	public float restartDelay = 5f;
 
+    private int index {
+        get {
+            if (SceneManager.GetActiveScene().name == "Level3")
+            {
+                return SceneManager.GetActiveScene().buildIndex - 4;
+            }
+            else
+            {
+                return SceneManager.GetActiveScene().buildIndex + 1;
+            }
+        }
+    }
 
-	// If level is completed
-	public void CompletedLevel ()
+
+    // If level is completed
+    public void CompletedLevel ()
 	{
 		completeLevelUI.SetActive(true);
 		Debug.Log("LEVEL WON!");	
@@ -51,4 +64,10 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene("MainMenu");
 		Time.timeScale = 1f;
 	}
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(index);
+    }
+
 }

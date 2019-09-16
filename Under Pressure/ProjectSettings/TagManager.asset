@@ -7,6 +7,17 @@ TagManager:
   - crowd
   - crush
   - friends
+  - Boundary
+  - exit_door
+  - check_point_one
+  - check_point_three
+  - check_point_four
+  - check_point_two
+  - salesman
+  - stress_ball
+  - good_pickup
+  - bully
+  - bad_pickup
   layers:
   - Default
   - TransparentFX

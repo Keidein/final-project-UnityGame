@@ -12,9 +12,9 @@ public class Player : MonoBehaviour
 
     // Ethans code
     #region Ethans Variables
-    public int crowd_panic_rate;        //Controls the rate at which the crows enemy raises
+    public int crowd_panic_rate = 2;        //Controls the rate at which the crows enemy raises
     public int pick_up_restore = 15;
-    public int salesman_panic_rate;
+    public int salesman_panic_rate = 2;
     public int anxiety = 10;
 
     public Text anxiety_text;           //Stores the anxiety ratio text.
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
         Debug.Log(errandInformer);
         if (errandInformer == null) errandInformer = null;
         if (exitinformer == null) exitinformer = null;
+        SetAnxietyText();
     }
 
     // Taken from Ethans code, but modified to reduce line count.
@@ -62,17 +63,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         //ABILITY KEY INPUTS
-        if (Input.GetKeyDown("space") && stress_ball_obtained)
-        {
-            anxiety -= 40;
-            stress_ball_obtained = false;
-            SetAnxietyText();
-        }
-
-        if (Input.GetKeyDown("z") && !breathing)
+        if (Input.GetKey("z") && !breathing)
         {
             StartCoroutine("breathing_routine");
-        } else if (Input.GetKeyDown("z") && breathing)
+        } else if (Input.GetKeyUp("z") && breathing)
         {
             StopCoroutine("breathing_routine");
             breathing = false;
@@ -93,11 +87,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown("c") && in_zone_four) check_four_ready = true;
 
         //Finish first level
-        if (Input.GetKeyDown("c") && check_one_ready && check_two_ready && check_three_ready && check_four_ready && exit_ready)
-        {
-            //FindObjectOfType<GameManager>().EndGame();
-            gameManager.CompletedLevel();
-        }
+        if (Input.GetKeyDown("c") && check_one_ready && check_two_ready && check_three_ready && check_four_ready && exit_ready) gameManager.CompletedLevel();
 
         //UI INFORMATION
         if (stress_ball_obtained) stress_icon.SetActive(true);
@@ -185,8 +175,9 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("stress_ball"))
         {
-            stress_ball_obtained = true;
+            anxiety -= pick_up_restore;
             Destroy(other.gameObject);
+            SetAnxietyText();
         }
 
         if (other.gameObject.CompareTag("crowd")) StartCoroutine("crowd_panic");
@@ -200,11 +191,7 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("salesman")) StartCoroutine("salesman_panic");
         if (other.gameObject.CompareTag("friends")) StartCoroutine("friends_panic");
-        if (other.gameObject.CompareTag("crush"))
-        {
-            StartCoroutine("crush_panic");
-            StartCoroutine("crush_panic_two");
-        }
+        if (other.gameObject.CompareTag("crush")) StartCoroutine("crush_panic");
 
         if (other.gameObject.CompareTag("bully")) anxiety += 40;
 
@@ -221,11 +208,7 @@ public class Player : MonoBehaviour
         //And also begin the code for each seperate pickup / enemy
         if (other.gameObject.CompareTag("crowd")) StopCoroutine("crowd_panic");
         if (other.gameObject.CompareTag("salesman")) StopCoroutine("salesman_panic");
-        if (other.gameObject.CompareTag("crush"))
-        {
-            StopCoroutine("crush_panic");
-            StopCoroutine("crush_panic_two");
-        }
+        if (other.gameObject.CompareTag("crush")) StopCoroutine("crush_panic");
         if (other.gameObject.CompareTag("friends")) StopCoroutine("Friends_panic");
         if (other.gameObject.CompareTag("check_point_one")) in_zone_one = false; in_zone = false;
         if (other.gameObject.CompareTag("check_point_two")) in_zone_two = false; in_zone = false;
@@ -256,6 +239,18 @@ public class Player : MonoBehaviour
     #endregion
 
     #region IEnumerators
+    IEnumerator breathing_routine()
+    {
+        for (int current_anxiety = anxiety; current_anxiety >= 1; current_anxiety -= 6)
+        {
+            breathing = true;
+            anxiety = current_anxiety;
+
+            SetAnxietyText();
+            yield return new WaitForSeconds(.3f);
+        }
+    }
+
     IEnumerator crowd_panic()
     {
         for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += crowd_panic_rate)
@@ -278,7 +273,7 @@ public class Player : MonoBehaviour
 
     IEnumerator boss_panic()
     {
-        for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += 1)
+        for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += 2)
         {
             anxiety = current_anxiety;
             SetAnxietyText();
@@ -287,23 +282,9 @@ public class Player : MonoBehaviour
     }
 
     //dictate behaviour for when player is within crush hitbox
-    /*IEnumerator friends_panic()
-    {
-        for (float current_speed = speed; current_speed <= 100; current_speed -= 0.1f)
-        {
-            speed = current_speed;
-            if (speed <= 2.0f)
-            {
-                speed = 2.0f;
-            }
-            yield return new WaitForSeconds(.1f);
-        }
-    }*/
-
-    //dictate behaviour for when player is within crush hitbox
     IEnumerator crush_panic()
     {
-        for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += 1)
+        for (int current_anxiety = anxiety; current_anxiety <= 100; current_anxiety += 4)
         {
             anxiety = current_anxiety;
             SetAnxietyText();

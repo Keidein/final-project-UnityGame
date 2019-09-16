@@ -10,7 +10,7 @@ public class LevelComplete : MonoBehaviour {
         get {
             if (SceneManager.GetActiveScene().name == "Level3")
             {
-                return SceneManager.GetActiveScene().buildIndex - 3;
+                return SceneManager.GetActiveScene().buildIndex - 4;
             } else
             {
                 return SceneManager.GetActiveScene().buildIndex + 1;
@@ -18,9 +18,7 @@ public class LevelComplete : MonoBehaviour {
         }
     }
 
-	public void LoadNextLevel()
-	{
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	public void LoadNextLevel()	{
         SceneManager.LoadScene(index);
 	}
 }
