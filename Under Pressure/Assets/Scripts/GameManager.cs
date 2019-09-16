@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour {
 	public void GameOver ()
 	{
 		gameOverMenuUI.SetActive(true);
+		Debug.Log("Game over menu opened");
 		Time.timeScale = 0f;
 	}
 
