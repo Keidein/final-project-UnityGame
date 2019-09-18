@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4507359176772805912}
   - component: {fileID: 4533163038408394494}
   - component: {fileID: 4596087155485151122}
+  - component: {fileID: 1554355168110096193}
   m_Layer: 0
   m_Name: Enemy6
   m_TagString: crowd
@@ -96,9 +97,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016693592, y: -0.35402143}
+  m_Offset: {x: -0.016693592, y: -0.042807817}
   serializedVersion: 2
-  m_Radius: 0.35313296
+  m_Radius: 0.6643466
 --- !u!50 &4533163038408394494
 Rigidbody2D:
   serializedVersion: 4
@@ -136,3 +137,29 @@ MonoBehaviour:
   spawn: {fileID: 0}
   SpawnRadius: 0.5
   enemyAmount: 0
+--- !u!61 &1554355168110096193
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492889940979740758}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.021219015, y: -0.39609003}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.90625, y: 1.46875}
+    newSize: {x: 0.8, y: 1.1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.36398363, y: 0.67656994}
+  m_EdgeRadius: 0

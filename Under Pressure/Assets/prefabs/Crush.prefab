@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4101520218959597605}
   - component: {fileID: 4075716322666476483}
   - component: {fileID: 4156340081707530927}
+  - component: {fileID: 2857652227356069649}
   m_Layer: 0
   m_Name: Crush
   m_TagString: Untagged
@@ -93,12 +94,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016693592, y: -0.28140628}
+  m_Offset: {x: -0.016693592, y: 0.1292271}
   serializedVersion: 2
-  m_Radius: 0.28051782
+  m_Radius: 0.8311396
 --- !u!50 &4075716322666476483
 Rigidbody2D:
   serializedVersion: 4
@@ -136,3 +137,29 @@ MonoBehaviour:
   spawn: {fileID: 0}
   SpawnRadius: 0.5
   enemyAmount: 0
+--- !u!61 &2857652227356069649
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053009016694850923}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02566433, y: -0.24731326}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.96875, y: 1.40625}
+    newSize: {x: 0.8, y: 1.1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.38546467, y: 0.9116235}
+  m_EdgeRadius: 0

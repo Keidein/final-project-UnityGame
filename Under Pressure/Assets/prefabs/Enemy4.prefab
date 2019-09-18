@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2646341875340074322}
   - component: {fileID: 2656540370615303860}
   - component: {fileID: 2737201533386799064}
+  - component: {fileID: 7288193747344856883}
   m_Layer: 0
   m_Name: Enemy4
   m_TagString: crowd
@@ -93,12 +94,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016693592, y: -0.35402143}
+  m_Offset: {x: -0.016693592, y: -0.0040500164}
   serializedVersion: 2
-  m_Radius: 0.35313296
+  m_Radius: 0.7031044
 --- !u!50 &2656540370615303860
 Rigidbody2D:
   serializedVersion: 4
@@ -136,3 +137,29 @@ MonoBehaviour:
   spawn: {fileID: 0}
   SpawnRadius: 0.5
   enemyAmount: 0
+--- !u!61 &7288193747344856883
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624781889160136732}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000023841858, y: -0.35463774}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.96875, y: 1.40625}
+    newSize: {x: 0.8, y: 1.1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.40879583, y: 0.6969745}
+  m_EdgeRadius: 0

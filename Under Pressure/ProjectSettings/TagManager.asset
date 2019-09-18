@@ -18,6 +18,7 @@ TagManager:
   - good_pickup
   - bully
   - bad_pickup
+  - locker
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     private bool at_locker = false;
     public bool locker_done = false;
+
+    private bool crowdCoroutine = false;
     #endregion
 
     // Ethans code
@@ -239,7 +241,11 @@ public class Player : MonoBehaviour
             SetAnxietyText();
         }
 
-        if (other.gameObject.CompareTag("crowd")) StartCoroutine("crowd_panic");
+        if (other.gameObject.CompareTag("crowd"))
+        {
+            crowdCoroutine = true;
+            StartCoroutine("crowd_panic");
+        }
 
         if (other.gameObject.CompareTag("bad_pickup"))
         {
@@ -250,7 +256,17 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("salesman")) StartCoroutine("salesman_panic");
         if (other.gameObject.CompareTag("friends")) StartCoroutine("friends_panic");
-        if (other.gameObject.CompareTag("crush")) StartCoroutine("crush_panic");
+        if (other.gameObject.CompareTag("crush"))
+        {
+            if (crowdCoroutine)
+            {
+                StopCoroutine("crowd_panic");
+                StartCoroutine("crush_panic");
+            } else
+            {
+                StartCoroutine("crush_panic");
+            }
+        }
 
         if (other.gameObject.CompareTag("bully")) anxiety += 40;
 
@@ -267,7 +283,11 @@ public class Player : MonoBehaviour
     {
         //Check through to see what the player is colliding with
         //And also begin the code for each seperate pickup / enemy
-        if (other.gameObject.CompareTag("crowd")) StopCoroutine("crowd_panic");
+        if (other.gameObject.CompareTag("crowd"))
+        {
+            crowdCoroutine = false;
+            StopCoroutine("crowd_panic");
+        }
         if (other.gameObject.CompareTag("salesman")) StopCoroutine("salesman_panic");
         if (other.gameObject.CompareTag("crush")) StopCoroutine("crush_panic");
         if (other.gameObject.CompareTag("friends")) StopCoroutine("Friends_panic");

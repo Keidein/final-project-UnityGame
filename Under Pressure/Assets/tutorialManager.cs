@@ -19,7 +19,6 @@ public class tutorialManager : MonoBehaviour {
         controls = false;
 
         tutorialButton.onClick.AddListener(tutorialTextChange);
-        mainMenu.onClick.AddListener(backToMenu);
     }
 	
 	// Update is called once per frame
@@ -47,10 +46,5 @@ public class tutorialManager : MonoBehaviour {
         {
             controls = false;
         }
-    }
-
-    void backToMenu()
-    {
-        Application.Quit();
     }
 }

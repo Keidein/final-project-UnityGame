@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,10 @@ public class GameManager : MonoBehaviour {
             if (SceneManager.GetActiveScene().name == "Level3")
             {
                 return SceneManager.GetActiveScene().buildIndex - 4;
+            }
+            else if (SceneManager.GetActiveScene().name == "tutorial")
+            {
+                return SceneManager.GetActiveScene().buildIndex + 1;
             }
             else
             {
@@ -66,6 +71,11 @@ public class GameManager : MonoBehaviour {
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(index);
+            SceneManager.LoadScene(index);        
+    }
+
+    public void startGame()
+    {
+        SceneManager.LoadScene("Level1");
     }
 }
