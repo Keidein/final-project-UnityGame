@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    // Dylans code
+    //Dylans code
+    #region Dylans Variables
     // Importing the movement script.
     public Movement movement;
     public GameManager gameManager;
 
+    private bool at_locker = false;
+    public bool locker_done = false;
+    #endregion
+
     // Ethans code
     #region Ethans Variables
     public int crowd_panic_rate = 2;        //Controls the rate at which the crows enemy raises
-    public int pick_up_restore = 15;
+    public int pick_up_restore = 14;
     public int salesman_panic_rate = 2;
     public int anxiety = 10;
 
@@ -46,8 +51,13 @@ public class Player : MonoBehaviour
     public GameObject exitinformer;
     private bool in_exit = false;
 
+    public GameObject lockerInformer;
+
     //ready to leave
     private bool exit_ready = false;
+
+    //animations
+    public Animator animator;
     #endregion
 
     void Start()
@@ -56,6 +66,7 @@ public class Player : MonoBehaviour
         if (errandInformer == null) errandInformer = null;
         if (exitinformer == null) exitinformer = null;
         SetAnxietyText();
+        InvokeRepeating("anxietyPerSecond", 0.0f, 1.0f);
     }
 
     // Taken from Ethans code, but modified to reduce line count.
@@ -66,7 +77,8 @@ public class Player : MonoBehaviour
         if (Input.GetKey("z") && !breathing)
         {
             StartCoroutine("breathing_routine");
-        } else if (Input.GetKeyUp("z") && breathing)
+        }
+        else if (Input.GetKeyUp("z") && breathing)
         {
             StopCoroutine("breathing_routine");
             breathing = false;
@@ -85,6 +97,8 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown("c") && in_zone_two) check_two_ready = true;
         else if (Input.GetKeyDown("c") && in_zone_three) check_three_ready = true;
         else if (Input.GetKeyDown("c") && in_zone_four) check_four_ready = true;
+
+        if (Input.GetKeyDown("c") && at_locker) locker_done = true;
 
         //Finish first level
         if (Input.GetKeyDown("c") && check_one_ready && check_two_ready && check_three_ready && check_four_ready && exit_ready) gameManager.CompletedLevel();
@@ -107,12 +121,57 @@ public class Player : MonoBehaviour
             FindObjectOfType<GameManager>().EndGame();
         }
 
+        if (at_locker) lockerInformer.SetActive(true);
+        else lockerInformer.SetActive(false);
+
         if (in_zone) errandInformer.SetActive(true);
         else errandInformer.SetActive(false);
 
         if (check_one_ready && check_two_ready && check_three_ready && check_four_ready && exit_ready) exitinformer.SetActive(true);
         else exitinformer.SetActive(false);
+
+        #region ANIMATIONS
+            //Animate the player on key presses
+
+            if (Input.GetKeyDown("w"))
+            {
+                animator.SetBool("up", true);
+            }
+            else if (Input.GetKeyUp("w"))
+            {
+                animator.SetBool("up", false);
+            }
+
+            if (Input.GetKeyDown("a"))
+            {
+                animator.SetBool("left", true);
+            }
+            else if (Input.GetKeyUp("a"))
+            {
+                animator.SetBool("left", false);
+            }
+
+            if (Input.GetKeyDown("s"))
+            {
+                animator.SetBool("down", true);
+            }
+            else if (Input.GetKeyUp("s"))
+            {
+                animator.SetBool("down", false);
+            }
+
+            if (Input.GetKeyDown("d"))
+            {
+                animator.SetBool("right", true);
+            }
+            else if (Input.GetKeyUp("d"))
+            {
+                animator.SetBool("right", false);
+            }
+
+            #endregion
     }
+
     #endregion
 
     #region Dylans FixedUpdate() so the player can move.
@@ -200,6 +259,8 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("check_point_three")) in_zone_three = true; in_zone = true;
         if (other.gameObject.CompareTag("check_point_four")) in_zone_four = true; in_zone = true;
         if (other.gameObject.CompareTag("exit_door")) exit_ready = true;
+
+        if (other.gameObject.CompareTag("locker")) at_locker = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -215,6 +276,8 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("check_point_three")) in_zone_three = false; in_zone = false;
         if (other.gameObject.CompareTag("check_point_four")) in_zone_four = false; in_zone = false;
         if (other.gameObject.CompareTag("exit_door")) exit_ready = false;
+
+        if (other.gameObject.CompareTag("locker")) at_locker = false;
     }
 
     #region Ethans functions
@@ -227,7 +290,7 @@ public class Player : MonoBehaviour
 
     void unhealthy_pickup()
     {
-        anxiety += 40;
+        anxiety += 10;
         SetAnxietyText();
     }
 
@@ -235,6 +298,12 @@ public class Player : MonoBehaviour
     {
         if (anxiety < 0) anxiety = 0;
         anxiety_text.text = anxiety.ToString() + "%";
+    }
+
+    void anxietyPerSecond()
+    {
+        anxiety++;
+        SetAnxietyText();
     }
     #endregion
 

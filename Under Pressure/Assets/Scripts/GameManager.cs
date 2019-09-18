@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-
     // If level is completed
     public void CompletedLevel ()
 	{
@@ -42,15 +41,14 @@ public class GameManager : MonoBehaviour {
 			GameOver();
 			//Invoke("Restart", restartDelay);
 		}	
-
-
 	}
+
+
 
 
 	public void GameOver ()
 	{
 		gameOverMenuUI.SetActive(true);
-		Debug.Log("Game over menu opened");
 		Time.timeScale = 0f;
 	}
 
@@ -70,5 +68,4 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.LoadScene(index);
     }
-
 }
